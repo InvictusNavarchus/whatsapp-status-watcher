@@ -3,7 +3,7 @@
 // @namespace    https://github.com/InvictusNavarchus/whatsapp-status-watcher
 // @downloadURL  https://raw.githubusercontent.com/InvictusNavarchus/whatsapp-status-watcher/master/whatsapp-status-watcher.user.js
 // @updateURL    https://raw.githubusercontent.com/InvictusNavarchus/whatsapp-status-watcher/master/whatsapp-status-watcher.user.js
-// @version      0.1.0
+// @version      0.1.1
 // @description  Tracks and records a user's online status on WhatsApp Web
 // @author       Invictus
 // @match        https://web.whatsapp.com/*
@@ -121,13 +121,21 @@
         statusEntries.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
         
         // Convert to CSV
-        let csv = 'Timestamp (Local),Status\n';
+        let csv = 'Timestamp (Local),Name,Status\n';
         statusEntries.forEach(entry => {
             // Convert ISO timestamp to local date/time format
             const localTime = new Date(entry.timestamp).toLocaleString();
-            // Escape any commas in the status
-            const escapedStatus = entry.status.replace(/"/g, '""');
-            csv += `"${localTime}","${escapedStatus}"\n`;
+            
+            // Split the status by newline to separate name from status
+            const statusParts = entry.status.split('\n');
+            const name = statusParts[0] || '';
+            const status = statusParts.length > 1 ? statusParts.slice(1).join(' - ') : '';
+            
+            // Escape any quotes in the fields
+            const escapedName = name.replace(/"/g, '""');
+            const escapedStatus = status.replace(/"/g, '""');
+            
+            csv += `"${localTime}","${escapedName}","${escapedStatus}"\n`;
         });
         
         // Download the CSV file
