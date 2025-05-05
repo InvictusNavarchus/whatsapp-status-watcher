@@ -1,9 +1,11 @@
 // ==UserScript==
 // @name         WhatsApp Online Status Watcher
-// @namespace    http://tampermonkey.net/
-// @version      1.0
+// @namespace    https://github.com/InvictusNavarchus/whatsapp-status-watcher
+// @downloadURL  https://raw.githubusercontent.com/InvictusNavarchus/whatsapp-status-watcher/master/whatsapp-status-watcher.user.js
+// @updateURL    https://raw.githubusercontent.com/InvictusNavarchus/whatsapp-status-watcher/master/whatsapp-status-watcher.user.js
+// @version      0.1.0
 // @description  Tracks and records a user's online status on WhatsApp Web
-// @author       You
+// @author       Invictus
 // @match        https://web.whatsapp.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=whatsapp.com
 // @grant        GM_setValue
